@@ -2,12 +2,66 @@ package br.ufpe.cin.if710.calculadora
 
 import android.app.Activity
 import android.os.Bundle
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var calc_display = text_calc.text
+
+        /*
+            Setando listeners para cada botão,
+            o EditText text_calc é atualizado com o símbolo
+            que foi clicado
+        */
+        btn_0.setOnClickListener { calc_display.append(btn_0.text) }
+        btn_1.setOnClickListener { calc_display.append(btn_1.text) }
+        btn_2.setOnClickListener { calc_display.append(btn_2.text) }
+        btn_3.setOnClickListener { calc_display.append(btn_3.text) }
+        btn_4.setOnClickListener { calc_display.append(btn_4.text) }
+        btn_5.setOnClickListener { calc_display.append(btn_5.text) }
+        btn_6.setOnClickListener { calc_display.append(btn_6.text) }
+        btn_7.setOnClickListener { calc_display.append(btn_7.text) }
+        btn_8.setOnClickListener { calc_display.append(btn_8.text) }
+        btn_9.setOnClickListener { calc_display.append(btn_9.text) }
+
+        btn_Add.setOnClickListener { calc_display.append(btn_Add.text) }
+        btn_Subtract.setOnClickListener { calc_display.append(btn_Subtract.text) }
+        btn_Multiply.setOnClickListener { calc_display.append(btn_Multiply.text) }
+        btn_Divide.setOnClickListener { calc_display.append(btn_Divide.text) }
+
+        btn_Dot.setOnClickListener { calc_display.append(btn_Dot.text) }
+        btn_LParen.setOnClickListener { calc_display.append(btn_LParen.text) }
+        btn_RParen.setOnClickListener { calc_display.append(btn_RParen.text) }
+        btn_Power.setOnClickListener { calc_display.append(btn_Power.text) }
+
+        /*
+            O botão Clear limpa o text_calc, que mostra a expressão,
+            e o text_info, que mostra o resultado
+        */
+        btn_Clear.setOnClickListener {
+            calc_display.clear()
+            text_info.text = ""
+        }
+
+        /*
+            Quando o botão Equal é clicado, a expressão é calculada usando
+            a função eval
+            Caso alguma exceção seja levantada, um Toast é mostrado, indicando
+            o erro que ocorreu
+        */
+        btn_Equal.setOnClickListener {
+            try {
+                text_info.text = eval(calc_display.toString()).toString()
+            } catch (e: RuntimeException) {
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     //Como usar a função:
