@@ -9,10 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <!--  Activity não é reiniciada após mudanças de configuração -->
+        <!-- https://developer.android.com/guide/topics/manifest/activity-element?hl=en-us#config -->
+        <activity android:name=".MainActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard
+            |keyboardHidden|navigation|screenLayout|fontScale
+            |uiMode|orientation|screenSize|smallestScreenSize
+            |layoutDirection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
